@@ -1,13 +1,6 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Entity, JoinTable, ManyToMany } from 'typeorm';
 import Specialization from './specialization.entity';
+import { Person } from '../../person/entity/basis-person.entity';
 
 interface Contacts {
   phoneNumber: string;
@@ -15,16 +8,7 @@ interface Contacts {
 }
 
 @Entity('doctor')
-export default class Doctor {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  firstName: string;
-
-  @Column()
-  secondName: string;
-
+export default class Doctor extends Person {
   @ManyToMany(() => Specialization, { eager: true })
   @JoinTable({
     name: 'doctor_specialization',
@@ -38,13 +22,4 @@ export default class Doctor {
     },
   })
   specializations: Specialization[];
-
-  @Column({ type: 'simple-json' })
-  contacts: Contacts;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

@@ -5,7 +5,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { Sex } from '../../person/entity/basis-person.entity';
+import { Sex } from '../../person/entity/basis-person.class';
 
 export class CreatePatientDto {
   @IsString()

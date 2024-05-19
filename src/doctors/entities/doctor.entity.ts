@@ -1,10 +1,11 @@
-import { Entity, JoinTable, ManyToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import Specialization from './specialization.entity';
-import { Person } from '../../person/entity/basis-person.entity';
+import { Person } from '../../person/entity/basis-person.class';
 
-interface Contacts {
-  phoneNumber: string;
-  email: string;
+interface WorkSchedule {
+  day: string;
+  startTime: string; // 'HH:mm' format
+  endTime: string;
 }
 
 @Entity('doctor')
@@ -22,4 +23,10 @@ export default class Doctor extends Person {
     },
   })
   specializations: Specialization[];
+
+  @Column()
+  qualifications: string[];
+
+  @Column({ type: 'simple-json' })
+  workSchedule: WorkSchedule;
 }

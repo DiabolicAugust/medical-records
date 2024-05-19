@@ -15,7 +15,6 @@ export enum Sex {
   Other = 'other',
 }
 
-@Entity()
 @TableInheritance({ column: { type: 'varchar', name: 'type' } })
 @Check(`"sex" IN ('male', 'female', 'other')`)
 export abstract class Person {
